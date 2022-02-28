@@ -9,6 +9,10 @@
 </head>
 <body>
 	
+	<div>
+		<div id="loss_id"></div>
+	</div>
+
 <script>
 	// model
 	const model = tf.sequential();
@@ -70,9 +74,11 @@ Data example
 	// console.log(x2);
 
 	async function epoch(){
-		for(i=0;i<100;i++){
+		const loss_id = document.querySelector('#loss_id');
+		for(i=0;i<2;i++){
 			const result = await model.fit(x1,x2,{suffle:true,epochs:100});
 			console.log( "HERE", (result.history.loss[0] * 100).toFixed(2), "%");
+			loss_id.innerHTML = (result.history.loss[0] * 100).toFixed(2)+"%";
 		}
 	}
 
