@@ -101,14 +101,14 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Find the linear value in a 2d tensor</h1>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-3 col-md-3 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -156,17 +156,39 @@
                         </div>
 
 
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-3 col-md-4 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <h4>Loss</h4>
 									</div>
                                     <div class="row no-gutters align-items-center">
-										<div id="loss_id"></div>
+										<div class="text-info" id="loss_id"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+                        <div class="col-xl-3 col-md-4 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <h4>Expected output</h4>
 									</div>
                                     <div class="row no-gutters align-items-center">
-                                        <h4>Result</h4>
+										0.1% <br />
+										0.3% <br />
+										0.5% <br />
+									</div>
+                                    <div class="row no-gutters align-items-center">
+                                        <h4 class="text-primary">Result</h4>
+									</div>
+                                    <div class="row no-gutters align-items-center">
+										<div class="text-success" id="result_id"></div>
+									</div>
+                                    <div class="row no-gutters align-items-center">
+                                        <p>We need at least 500 epochs repetitions to make the loss closest to 0. Using only a few for the example</p>
+										<small>* View page source to understand the code</small>
 									</div>
                                     <div class="row no-gutters align-items-center">
 										<div id="result_id"></div>
@@ -242,9 +264,13 @@
     <!-- Page level custom scripts -->
 
 	<script>
-		var loss_id = document.getElementById("loss_id");
-		console.log("loss_id",loss_id);
-		// loss_id.innerHTML = getData();
+
+	/**
+	 * Minor Solis
+	 * Testing example of a 2d tensor
+	 */
+
+	var loss_id = document.getElementById("loss_id");
 
 
 	// model
@@ -303,20 +329,8 @@ Data example
 		[0.5]
 		]);
 	
-
-	// console.log(x2);
-
-	// function getData(){
-	// 	let returnValue = "";
-	// 	for(i=0;1<x1.length;i++){
-	// 		returnValue += "<tr><td>"+x1[i]+"</td><td>"+x2[i]+"</td></tr>";
-	// 	}
-	// 	return returnValue;
-	// }
-
-
 	async function epoch(){
-		for(i=0;i<50;i++){
+		for(i=0;i<20;i++){
 			const result = await model.fit(x1,x2,{suffle:true,epochs:100});
 			console.log( "HERE", (result.history.loss[0] * 100).toFixed(2), "%");
 			loss_id.innerHTML += (result.history.loss[0] * 100).toFixed(2)+"% <br />";
